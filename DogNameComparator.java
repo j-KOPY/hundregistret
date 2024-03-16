@@ -3,11 +3,11 @@
 import java.util.Comparator;
 
 public class DogNameComparator implements Comparator<Dog> {
-    public int compare(Dog name1, Dog name2) {
-        String dog1 = name1.getName();
-        String dog2 = name2.getName();
+    public int compare(Dog nameOne, Dog nameTwo) {
+        String dogOne = nameOne.getName();
+        String dogTwo = nameTwo.getName();
 
-        int nameResult = dog1.compareTo(dog2);
+        int nameResult = dogOne.compareTo(dogTwo);
 
         return nameResult;
     }
