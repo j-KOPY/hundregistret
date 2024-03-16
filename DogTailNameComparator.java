@@ -4,13 +4,13 @@ import java.util.*;
 
 public class DogTailNameComparator implements Comparator<Dog> {
 
-    public int compare(Dog dog1, Dog dog2) {
+    public int compare(Dog dogOne, Dog dogTwo) {
         DogTailComparator dogTailComparator = new DogTailComparator();
-        int tailResult = dogTailComparator.compare(dog1, dog2);
+        int tailResult = dogTailComparator.compare(dogOne, dogTwo);
 
         if (tailResult == 0) {
             DogNameComparator dogNameComparator = new DogNameComparator();
-            int nameResult = dogNameComparator.compare(dog1, dog2);
+            int nameResult = dogNameComparator.compare(dogOne, dogTwo);
             if (nameResult < 0) {
                 return -1;
             }

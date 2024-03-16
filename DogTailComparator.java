@@ -3,10 +3,10 @@
 import java.util.*;
 
 public class DogTailComparator implements Comparator<Dog> {
-    public int compare(Dog svans1, Dog svans2) {
-        if (svans1.getTailLength() < svans2.getTailLength())
+    public int compare(Dog tailOne, Dog tailTwo) {
+        if (tailOne.getTailLength() < tailTwo.getTailLength())
             return -1;
-        if (svans1.getTailLength() > svans2.getTailLength())
+        if (tailOne.getTailLength() > tailTwo.getTailLength())
             return 1;
         return 0;
     }

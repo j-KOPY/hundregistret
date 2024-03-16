@@ -18,7 +18,7 @@ public class DogCollection {
 
     public boolean removeDog(String dogName) {
         boolean inList = containsDog(dogName);
-        if (inList) {
+        if (inList && getDog(dogName).getOwner() == null) {
             hundar.remove(getDog(dogName));
             return true;
         }
@@ -39,12 +39,7 @@ public class DogCollection {
     }
 
     public boolean containsDog(String dogName) {
-        if (getDog(dogName) == null) {
-            return false;
-        }
-        else {
-            return true;
-        }
+        return getDog(dogName) != null;
     }
 
     public boolean containsDog(Dog dog) {

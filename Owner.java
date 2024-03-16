@@ -1,7 +1,6 @@
-//Belinda Johansson bejo1092
+// Belinda Johansson bejo1092
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Owner implements Comparable<Owner> {
     private String name;
@@ -19,25 +18,37 @@ public class Owner implements Comparable<Owner> {
     }
 
     public boolean addDog(Dog dog) {
-        if (dog.getOwner() != this) {
-            return false;
-        }
+        if (this != dog.getOwner()) return false;
+        else if (dogsOwned.contains(dog)) return false;
         else {
-            if (dogsOwned.contains(dog)) {
-                return false;
-            }
-            else {
-                dogsOwned.add(dog);
-                if (dog.getOwner() == this) {
-                    return true;
-                }
-                else {
-                    dog.setOwner(this);
-                    return true;
-                }
-            }
+//            DogSorter ds = new DogSorter();
+            DogNameComparator dnc = new DogNameComparator();
+            dogsOwned.add(dog);
+            DogSorter.sortDogs(dnc, dogsOwned);
+            return true;
         }
     }
+
+//    public boolean addDog(Dog dog) {
+//        if (dog.getOwner() != this) {
+//            return false;
+//        }
+//        else {
+//            if (dogsOwned.contains(dog)) {
+//                return false;
+//            }
+//            else {
+//                dogsOwned.add(dog);
+//                if (dog.getOwner() == this) {
+//                    return true;
+//                }
+//                else {
+//                    dog.setOwner(this);
+//                    return true;
+//                }
+//            }
+//        }
+//    }
 
     public boolean removeDog(Dog dog) {
         return dogsOwned.remove(dog);
@@ -46,11 +57,9 @@ public class Owner implements Comparable<Owner> {
     public ArrayList<Dog> getDogs() {
         ArrayList<Dog> immutableDogsOwned = new ArrayList<>();
         for (Dog dog : dogsOwned) {
-            // Assuming Dog class has a copy constructor or is immutable
             immutableDogsOwned.add(dog);
         }
         return immutableDogsOwned;
-//        return Collections.unmodifiableCollection(dogsOwned);
     }
 
     public int compareTo(Owner ettNamn) {
