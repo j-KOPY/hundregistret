@@ -8,22 +8,21 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 /**
- * Testfall för ägarsamlingen i uppgift HR3.2.
- * <p>
- * Beskrivningen av testfallens uppgift, styrka och svagheter från
- * <code>{@link HR1_1_OwnerTest}</code> gäller (naturligvis) också för
- * testfallen i denna klass. Var speciellt uppmärksam på att testfallen kan
- * uppdateras när som helst, inklusive <em>efter</em> deadline.
+ * Testfall för ägarsamlingen i uppgift HR3.2. <p> Beskrivningen av testfallens
+ * uppgift, styrka och svagheter från <code>{@link HR1_1_OwnerTest}</code>
+ * gäller (naturligvis) också för testfallen i denna klass. Var speciellt
+ * uppmärksam på att testfallen kan uppdateras när som helst, inklusive
+ * <em>efter</em> deadline.
  *
  * @author Henrik Bergström
- * @version 2024-01-04 15:04
+ * @version 2024-01-28 11:14
  * @see HR1_1_OwnerTest
  */
 @TestMethodOrder(OrderAnnotation.class)
 @DisplayName("HR3.2: Testfall för ägarsamlingen")
 public class HR3_2_OwnerCollectionTest {
 
-    public static final String VERSION = "2024-01-04 15:04";
+    public static final String VERSION = "2024-01-28 11:14";
 
     private static final Owner FIRST_OWNER = new Owner("First");
     private static final Owner SECOND_OWNER = new Owner("Second");
@@ -155,6 +154,17 @@ public class HR3_2_OwnerCollectionTest {
         assertCollectionUpdatedCorrectly(false, rv, FIRST_OWNER);
     }
 
+    @Test
+    @Order(80)
+    @DisplayName("Lägg till två ägare med namn som delvis överlappar")
+    public void addingTwoOwnersWithOverlappingName() {
+        Owner pernilla = new Owner("Pernilla");
+        Owner per = new Owner("Per");
+
+        collection.addOwner(pernilla);
+        var rv = collection.addOwner(per);
+        assertCollectionUpdatedCorrectly(true, rv, pernilla, per);
+    }
     ////////////////////////////////////////////
     //
     // Tester för containsOwner-metoden som tar en
@@ -163,14 +173,14 @@ public class HR3_2_OwnerCollectionTest {
     ////////////////////////////////////////////
 
     @Test
-    @Order(80)
+    @Order(90)
     @DisplayName("Sökning i en tom samling")
     public void attemptingToSearchForNonexistingOwnerInEmptyCollection() {
         assertFalse(collection.containsOwner(OTHER_OWNER));
     }
 
     @Test
-    @Order(90)
+    @Order(100)
     @DisplayName("Sökning efter en ägare som inte existerar")
     public void attemptingToSearchForNonexistingOwner() {
         addAllThreeTestOwnersInOrder();
@@ -178,7 +188,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(100)
+    @Order(110)
     @DisplayName("Sökning efter den första ägaren")
     public void searchingForFirstOwner() {
         addAllThreeTestOwnersInOrder();
@@ -186,7 +196,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(110)
+    @Order(120)
     @DisplayName("Sökning efter den andra ägaren")
     public void searchingForSecondOwner() {
         addAllThreeTestOwnersInOrder();
@@ -194,7 +204,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(120)
+    @Order(130)
     @DisplayName("Sökning efter den sista ägaren")
     public void searchingForLastOwner() {
         addAllThreeTestOwnersInOrder();
@@ -202,7 +212,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(130)
+    @Order(140)
     @DisplayName("Sökning förändrar inte innehållet i samlingen")
     public void searchingDoesNotChangeContent() {
         addAllThreeTestOwnersInOrder();
@@ -218,14 +228,14 @@ public class HR3_2_OwnerCollectionTest {
     ////////////////////////////////////////////
 
     @Test
-    @Order(140)
+    @Order(150)
     @DisplayName("Sökning i en tom samling via namn")
     public void attemptingToSearchForNonexistingOwnerInEmptyCollectionByName() {
         assertFalse(collection.containsOwner(OTHER_OWNER.getName()));
     }
 
     @Test
-    @Order(150)
+    @Order(160)
     @DisplayName("Sökning efter en ägare som inte existerar via namn")
     public void attemptingToSearchForNonexistingOwnerByName() {
         addAllThreeTestOwnersInOrder();
@@ -233,7 +243,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(160)
+    @Order(170)
     @DisplayName("Sökning efter den första ägaren via namn")
     public void searchingForFirstOwnerByName() {
         addAllThreeTestOwnersInOrder();
@@ -241,7 +251,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(170)
+    @Order(180)
     @DisplayName("Sökning efter den andra ägaren via namn")
     public void searchingForSecondOwnerByName() {
         addAllThreeTestOwnersInOrder();
@@ -249,7 +259,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(180)
+    @Order(190)
     @DisplayName("Sökning efter den sista ägaren via namn")
     public void searchingForLastOwnerByName() {
         addAllThreeTestOwnersInOrder();
@@ -257,7 +267,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(190)
+    @Order(200)
     @DisplayName("Sökning efter ägare via namn, nytt strängobjekt för namnet")
     public void searchingForOwnerByNameNewStringObject() {
         addAllThreeTestOwnersInOrder();
@@ -265,7 +275,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(200)
+    @Order(210)
     @DisplayName("Sökning via namn förändrar inte innehållet i samlingen")
     public void searchingDoesNotChangeContentByName() {
         addAllThreeTestOwnersInOrder();
@@ -280,7 +290,7 @@ public class HR3_2_OwnerCollectionTest {
     ////////////////////////////////////////////
 
     @Test
-    @Order(210)
+    @Order(220)
     @DisplayName("Försök att hämta ut en ägare ur en tom samling")
     public void attemptingToGetOwnerFromEmptyCollection() {
         // TODO: hantera Optional
@@ -289,7 +299,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(220)
+    @Order(230)
     @DisplayName("Försök att hämta en ägare som inte existerar")
     public void attemptingToGetNonexistingOwner() {
         addAllThreeTestOwnersInOrder();
@@ -298,7 +308,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(230)
+    @Order(240)
     @DisplayName("Hämta den enda ägaren")
     public void getOnlyOwner() {
         collection.addOwner(A_OWNER);
@@ -307,7 +317,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(240)
+    @Order(250)
     @DisplayName("Hämta den första ägaren")
     public void getFirstOwner() {
         addAllThreeTestOwnersInOrder();
@@ -316,7 +326,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(250)
+    @Order(260)
     @DisplayName("Hämta den andra ägaren")
     public void getSecondOwner() {
         addAllThreeTestOwnersInOrder();
@@ -325,7 +335,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(260)
+    @Order(270)
     @DisplayName("Hämta den sista ägaren")
     public void getLastOwner() {
         addAllThreeTestOwnersInOrder();
@@ -334,7 +344,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(270)
+    @Order(280)
     @DisplayName("Hämta en ägare, nytt strängobjekt för namnet")
     public void getOwnerNewStringObject() {
         addAllThreeTestOwnersInOrder();
@@ -343,7 +353,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(280)
+    @Order(290)
     @DisplayName("Att hämta en ägare förändrar inte innehållet i samlingen")
     public void getOwnerDoesNotChangeContent() {
         addAllThreeTestOwnersInOrder();
@@ -358,7 +368,7 @@ public class HR3_2_OwnerCollectionTest {
     ////////////////////////////////////////////
 
     @Test
-    @Order(290)
+    @Order(300)
     @DisplayName("Hämta ägarna från en tom samling")
     public void getOwnersFromEmptyCollection() {
         var owners = new HashSet<Owner>(collection.getOwners());
@@ -366,7 +376,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(300)
+    @Order(310)
     @DisplayName("Hämta ägarna från en samling innehållandes ägare")
     public void getOwnersFromNonEmptyCollection() {
         addAllThreeTestOwnersInOrder();
@@ -375,7 +385,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(310)
+    @Order(320)
     @DisplayName("Att hämta ägarna förändrar inte innehållet i samlingen")
     public void getOwnersDoesNotChangeContent() {
         addAllThreeTestOwnersInOrder();
@@ -385,7 +395,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(320)
+    @Order(330)
     @DisplayName("Förändringar i samlingen med de hämtade ägarna påverkar inte orginalet")
     public void changesToCollectionFromGetOwnersDoesNotChangeOriginal() {
         addAllThreeTestOwnersInOrder();
@@ -400,7 +410,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(330)
+    @Order(340)
     @DisplayName("Ägarna kommer i rätt ordning")
     public void getOwnersReturnsSortedList() {
         Owner adam = new Owner("Adam");
@@ -417,7 +427,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @RepeatedTest(5)
-    @Order(340)
+    @Order(350)
     @DisplayName("Ägarna kommer i rätt ordning oavsett hur de sätts in")
     public void getOwnersReturnsSortedListIndependenOfInsertionOrder() {
         Owner adam = new Owner("Adam");
@@ -443,7 +453,7 @@ public class HR3_2_OwnerCollectionTest {
     ////////////////////////////////////////////
 
     @Test
-    @Order(350)
+    @Order(360)
     @DisplayName("Ta bort den enda ägaren i samlingen")
     public void removingOnlyOwner() {
         collection.addOwner(FIRST_OWNER);
@@ -452,7 +462,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(360)
+    @Order(370)
     @DisplayName("Ta bort den först tillagda ägaren från samlingen")
     public void removingFirstOwner() {
         addAllThreeTestOwnersInOrder();
@@ -461,7 +471,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(370)
+    @Order(380)
     @DisplayName("Ta bort den andra tillagda ägaren från samlingen")
     public void removingSecondOwner() {
         addAllThreeTestOwnersInOrder();
@@ -470,7 +480,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(380)
+    @Order(390)
     @DisplayName("Ta bort den sist tillagda ägaren från samlingen")
     public void removingLastOwner() {
         addAllThreeTestOwnersInOrder();
@@ -479,7 +489,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(390)
+    @Order(400)
     @DisplayName("Ta bort alla ägare från samlingen i insättningsordning")
     public void removingAllOwnersInOrder() {
         addAllThreeTestOwnersInOrder();
@@ -492,7 +502,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(400)
+    @Order(410)
     @DisplayName("Ta bort alla ägare från samlingen i omvänd insättningsordning")
     public void removingAllOwnersInReverseOrder() {
         addAllThreeTestOwnersInOrder();
@@ -505,7 +515,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(410)
+    @Order(420)
     @DisplayName("Försök ta bort en ägare som inte existerar från en tom samling")
     public void attemptingToRemoveNonexistingOwnerFromEmptyCollection() {
         var rv = collection.removeOwner(OTHER_OWNER);
@@ -513,7 +523,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(420)
+    @Order(430)
     @DisplayName("Försök ta bort en ägare som inte existerar i samlingen")
     public void attemptingToRemoveNonexistingOwner() {
         addAllThreeTestOwnersInOrder();
@@ -529,7 +539,7 @@ public class HR3_2_OwnerCollectionTest {
     ////////////////////////////////////////////
 
     @Test
-    @Order(430)
+    @Order(440)
     @DisplayName("Ta bort den enda ägaren i samlingen via namn")
     public void removingOnlyOwnerByName() {
         collection.addOwner(FIRST_OWNER);
@@ -538,7 +548,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(440)
+    @Order(450)
     @DisplayName("Ta bort den enda ägaren i samlingen via namn, nytt strängobjekt för namnet")
     public void removingOnlyOwnerByNameNewStringObject() {
         collection.addOwner(FIRST_OWNER);
@@ -547,7 +557,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(450)
+    @Order(460)
     @DisplayName("Ta bort den först tillagda ägaren från samlingen via namn")
     public void removingFirstOwnerByName() {
         addAllThreeTestOwnersInOrder();
@@ -556,7 +566,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(460)
+    @Order(470)
     @DisplayName("Ta bort den andra tillagda ägaren från samlingen via namn")
     public void removingSecondOwnerByName() {
         addAllThreeTestOwnersInOrder();
@@ -565,7 +575,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(470)
+    @Order(480)
     @DisplayName("Ta bort den sist tillagda ägaren från samlingen via namn")
     public void removingLastOwnerByName() {
         addAllThreeTestOwnersInOrder();
@@ -574,7 +584,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(480)
+    @Order(490)
     @DisplayName("Ta bort alla ägare från samlingen i insättningsordning via namn")
     public void removingAllOwnersInOrderByName() {
         addAllThreeTestOwnersInOrder();
@@ -587,7 +597,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(490)
+    @Order(500)
     @DisplayName("Ta bort alla ägare från samlingen i omvänd insättningsordning via namn")
     public void removingAllOwnersInReverseOrderByName() {
         addAllThreeTestOwnersInOrder();
@@ -600,7 +610,7 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(500)
+    @Order(510)
     @DisplayName("Försök ta bort en ägare som inte existerar från en tom samling via namn")
     public void attemptingToRemoveNonexistingOwnerFromEmptyCollectionByName() {
         var rv = collection.removeOwner(OTHER_OWNER.getName());
@@ -608,12 +618,111 @@ public class HR3_2_OwnerCollectionTest {
     }
 
     @Test
-    @Order(510)
+    @Order(520)
     @DisplayName("Försök ta bort en ägare som inte existerar i samlingen via namn")
     public void attemptingToRemoveNonexistingOwnerByName() {
         addAllThreeTestOwnersInOrder();
         var rv = collection.removeOwner(OTHER_OWNER.getName());
         assertCollectionUpdatedCorrectly(false, rv, FIRST_OWNER, SECOND_OWNER, THIRD_OWNER);
+    }
+
+    ////////////////////////////////////////////
+    //
+    // Tester för att arrayen växer om
+    // nödvändigt
+    //
+    ////////////////////////////////////////////
+
+    @Test
+    @Order(530)
+    @DisplayName("Arrayen växer om nödvändigt")
+    public void arrayGrowsIfNecessary() {
+        var expected = new ArrayList<Owner>();
+        for (int i = 0; i < 3; i++) {
+            Owner[] owners = ownersInCollection();
+            int ownersToAdd = owners == null || owners.length == 0 ? 3 : owners.length + 2;
+            for (int j = 0; j < ownersToAdd; j++) {
+                var owner = new Owner("%d%04d".formatted(i, j));
+                collection.addOwner(owner);
+                expected.add(owner);
+            }
+            assertEquals(expected, collection.getOwners(), "Fel ägare i samlingen");
+        }
+    }
+
+    @Test
+    @Order(540)
+    @DisplayName("Arrayen växer bara om nödvändigt")
+    public void arrayGrowsOnlyIfNecessary() {
+        var expected = new ArrayList<Owner>();
+
+        for (int i = 0; i < 5; i++) {
+            var owner = new Owner("%04d".formatted(expected.size()));
+            collection.addOwner(owner);
+            expected.add(owner);
+        }
+
+        Owner[] owners = ownersInCollection();
+        int ownersToAdd = owners.length - expected.size();
+
+        for (int i = 0; i < ownersToAdd; i++) {
+            var owner = new Owner("%04d".formatted(expected.size()));
+            collection.addOwner(owner);
+            expected.add(owner);
+        }
+
+        owners = ownersInCollection();
+        assertEquals(expected.size(), owners.length, "Arrayen ändrar storlek när så inte behövs");
+
+        // Ska inte läggas till eftersom en annan person med detta namn redan finns
+        collection.addOwner(new Owner(expected.get(3).getName()));
+
+        owners = ownersInCollection();
+        assertEquals(expected.size(), owners.length, "Arrayen ändrar storlek när så inte behövs");
+
+        assertEquals(expected, collection.getOwners(), "Fel ägare i samlingen");
+    }
+
+    ////////////////////////////////////////////
+    //
+    // Tester för att eventuella tomma platser
+    // återanvänds istället för att arrayen
+    // växer i onödan.
+    //
+    ////////////////////////////////////////////
+
+    @Test
+    @Order(550)
+    @DisplayName("Eventuella tomma platser efter borttag återanvänds")
+    public void emptyPlacesReused() {
+        var expected = new ArrayList<Owner>();
+        for (int i = 0; i < 3; i++) {
+            var owner = new Owner("%04d".formatted(expected.size()));
+            collection.addOwner(owner);
+            expected.add(owner);
+        }
+
+        Owner[] owners = ownersInCollection();
+        int ownersToAdd = owners.length - expected.size();
+
+        for (int i = 0; i < ownersToAdd; i++) {
+            var owner = new Owner("%04d".formatted(expected.size()));
+            collection.addOwner(owner);
+            expected.add(owner);
+        }
+
+        int expectedArrayLength = ownersInCollection().length;
+
+        var removed = expected.remove(1);
+        collection.removeOwner(removed);
+
+        var owner = new Owner("LAST ADDED");
+        collection.addOwner(owner);
+        expected.add(owner);
+
+        assertEquals(expectedArrayLength, ownersInCollection().length,
+                "Storleken på arrayen är fel efter att ha tagit bort en ägare och direkt lagt till en ny.");
+        assertEquals(expected, collection.getOwners(), "Fel ägare i samlingen");
     }
 
     /**

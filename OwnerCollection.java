@@ -2,6 +2,7 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class OwnerCollection {
     private Owner[] ownerCollection = new Owner[0];
@@ -9,6 +10,12 @@ public class OwnerCollection {
     public boolean addOwner(Owner owner) {
         boolean inList = containsOwner(owner.getName());
         if (!inList) {
+            for (int i = 0; i < ownerCollection.length; i++) {
+                if(ownerCollection[i] == null) {
+                    ownerCollection[i] = owner;
+                    return true;
+                }
+            }
             Owner[] tempOwnerCollection = new Owner[ownerCollection.length + 1];
             System.arraycopy(ownerCollection, 0, tempOwnerCollection, 0, ownerCollection.length);
             tempOwnerCollection[tempOwnerCollection.length - 1] = owner;
@@ -84,9 +91,9 @@ public class OwnerCollection {
     }
 
     public ArrayList<Owner> getOwners() {
-        Arrays.sort(ownerCollection);
-        ArrayList<Owner> owners = new ArrayList<>(Arrays.asList(ownerCollection));
-
-        return owners;
+        if (ownerCollection.length > 1) {
+            Arrays.sort(ownerCollection, Comparator.nullsLast(Comparator.naturalOrder()));
+        }
+        return new ArrayList<>(Arrays.asList(ownerCollection));
     }
 }

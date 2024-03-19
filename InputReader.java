@@ -4,12 +4,11 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class InputReader {
-
-    private static InputStream sharedInputStream = System.in;
-    private static InputStream lastInputStream;
-    private static int instanceCount = 0;
+//    private static InputStream sharedInputStream = System.in;
+//    private static InputStream lastInputStream;
+//    private static int instanceCount = 0;
+//    private static boolean constructorCalled = false;
     private Scanner input;
-    private static boolean constructorCalled = false;
     private static Set<InputStream> setOfInputStreams = new HashSet<InputStream>();
 
     public InputReader() throws IllegalStateException {
@@ -31,9 +30,9 @@ public class InputReader {
 //        }
         this.input = new Scanner(IS);
         setOfInputStreams.add(IS);
-        lastInputStream = IS;
-        instanceCount++;
-        constructorCalled = true;
+//        lastInputStream = IS;
+//        instanceCount++;
+//        constructorCalled = true;
     }
 
     public int readInteger(String leadText) {
@@ -85,7 +84,7 @@ public class InputReader {
     }
 
     public String readString(String leadText) {
-        String value = "";
+        String value;
 //        boolean validInput = false;
 //        while (!validInput) {
 //            try {
@@ -97,30 +96,44 @@ public class InputReader {
 //                validInput = true;
 //            }
 //            catch (Exception e) {
-//                System.out.println("Invalid input: Please enter a string.");
+//                System.out.println("error : Input is empty.");
+//                System.out.println("Please try again?>");
 //                input.nextLine();
 //            }
 //        }
 
-        System.out.print(leadText + "?>");
-        value = input.next();
-        // Enables reading from mixed types of inputs
-        value += input.nextLine();
-//                value = input.nextLine();
+//        System.out.print(leadText + "?>");
+//        String value = input.next();
+//        // Enables reading from mixed types of inputs
+//        value += input.nextLine();
+
+        do {
+            System.out.print(leadText + "?>");
+//            value = input.next();
+            // Enables reading from mixed types of inputs
+//            value += input.nextLine();
+            value = input.nextLine().trim();
+
+            if (value.isEmpty() || value.isBlank()) {
+                System.out.println("error : Input cannot be empty. Please try again.");
+            }
+        } while (value.isEmpty() || value.isBlank());
+
+        return value;
 
 //        resetStream();
 //        resetConstructor();
 //        input.close();
-        return value;
-    }
 
-    private void resetStream() {
-        lastInputStream = null;
     }
-
-    private void resetConstructor() {
-        constructorCalled = false;
-    }
+//
+//    private void resetStream() {
+//        lastInputStream = null;
+//    }
+//
+//    private void resetConstructor() {
+//        constructorCalled = false;
+//    }
 
 
 }

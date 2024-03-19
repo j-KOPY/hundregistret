@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class DogSorter {
-    public static void sortDogs(Comparator<Dog> dogComparator, ArrayList<Dog> dogArrayList) {
+    public static int sortDogs(Comparator<Dog> dogComparator, ArrayList<Dog> dogArrayList) {
         int counter = 0;
         for (int i = 0; i < dogArrayList.size() - 1; i++) {
             int currentMinIndex = nextDog(dogComparator, dogArrayList, i);
@@ -13,7 +13,7 @@ public class DogSorter {
                 counter += 1;
             }
         }
-//        return counter;
+        return counter;
     }
 
     private static int nextDog(Comparator<Dog> dogComparator, ArrayList<Dog> dogArrayList, int i) {
